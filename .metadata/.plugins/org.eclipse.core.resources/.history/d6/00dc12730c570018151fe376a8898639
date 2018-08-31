@@ -1,0 +1,46 @@
+package project;
+
+import java.util.HashMap;
+
+public class BaseballTeam {
+	public HashMap<Integer, String> hanHwaBat() {
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		map.put(1, "ÀÌ¿ë±Ô");
+		map.put(2, "¾ç¼º¿ì");
+		map.put(3,"¼Û±¤¹Î");
+		map.put(4,"È£À×");
+		map.put(5,"±èÅÂ±Õ");
+		map.put(6,"ÀÌ¼º¿­");
+		map.put(7,"ÇÏÁÖ¼®");
+		map.put(8,"ÃÖÀçÈÆ");
+		map.put(9,"Á¤±Ù¿ì");
+
+		return map;
+	}
+	public HashMap<Integer, String> hanHwaPit(){
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		map.put(1, "»ù½¼");
+		map.put(2, "ÈÙ·¯");
+		map.put(3, "±èÀç¿µ");
+		map.put(4, "Àå¹ÎÀç");
+		map.put(5, "¹è¿µ¼ö");
+		map.put(6, "¼­±Õ");
+		map.put(7, "¾È¿µ¸í");
+		map.put(8, "Á¤¿ì¶÷");
+		
+		return map;
+	}
+	public HashMap<Integer, String> kiaBat(){
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		map.put(1, "¹ö³ªµğ³ª");
+		map.put(2, "±è¼±ºó");
+		map.put(3, "¾ÈÄ¡È«");
+		map.put(4, "ÃÖÇü¿ì");
+		map.put(5, "±èÁÖÂù");
+		map.put(6, "³ªÁö¿Ï");
+		map.put(7, "ÀÌ¹üÈ£");
+		map.put(8, "±è¹Î½Ä");
+		map.put(9, "ÀÌ¸í±â");
+		return map;
+	}
+}

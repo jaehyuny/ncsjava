@@ -1,0 +1,71 @@
+package project;
+
+import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+
+import javax.swing.*;
+
+public class BaseballManagerMain extends JFrame implements ActionListener{
+	CardLayout card = new CardLayout();
+	SelectMode select = new SelectMode();
+	MainMenu mm = new MainMenu();
+	BaseballManagerPlay bmp = new BaseballManagerPlay();
+	
+	public BaseballManagerMain() {
+		setTitle("BaseballManager");
+		setLocation(400, 200);
+		getContentPane();
+		setLayout(card);
+		add("select", select);
+		add("mm", mm);
+		add("bmp", bmp);
+		setSize(640,480);
+		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		select.single.addActionListener(this);
+		mm.play.addActionListener(this);
+	}
+	public static void main(String[] args) {
+//		JFrame frame = new JFrame("Baseball Manager");
+//		frame.setPreferredSize(new Dimension(600, 500));
+//		frame.setLocation(400, 200);
+//		Container contentPane = frame.getContentPane();
+//		JButton single = new JButton("Single Play");
+//		JButton multi = new JButton("Multi Play");
+//		JPanel panel1 = new JPanel();
+//		GridLayout grid = new GridLayout(1,2);
+//		Font f1 = new Font("돋움",Font.BOLD, 40);
+//		single.setFont(f1);
+//		multi.setFont(f1);
+//		panel1.setLayout(grid);
+//		panel1.add(single);
+//		panel1.add(multi);
+//		contentPane.add(panel1, BorderLayout.CENTER);
+//		MouseListener play = new SelectPlayMode(single, multi);
+//		single.addMouseListener(play);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.pack();
+//		frame.setVisible(true);
+		new BaseballManagerMain();
+	}
+	
+	 @Override
+	 public void actionPerformed(ActionEvent e) {
+	   if(e.getSource()==select.single) {
+	    card.show(getContentPane(), "mm");
+	    //JRootPane연결 : 관리자(투명창)
+	   }
+	   if(e.getSource()==mm.play) {
+		   card.show(getContentPane(), "bmp");
+	   }
+	 }
+
+}

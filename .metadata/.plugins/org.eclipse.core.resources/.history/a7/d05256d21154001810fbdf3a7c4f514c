@@ -1,0 +1,33 @@
+package project;
+
+import java.util.HashMap;
+
+public class BaseballTeam {
+	public HashMap<Integer, String> hanHwa() {
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		map.put(1, "이용규");
+		map.put(2, "양성우");
+		map.put(3,"송광민");
+		map.put(4,"호잉");
+		map.put(5,"김태균");
+		map.put(6,"이성열");
+		map.put(7,"하주석");
+		map.put(8,"최재훈");
+		map.put(9,"정근우");
+
+		return map;
+	}
+	public HashMap<Integer, String> kia(){
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		map.put(1, "버나디나");
+		map.put(2, "김선빈");
+		map.put(3, "안치홍");
+		map.put(4, "최형우");
+		map.put(5, "김주찬");
+		map.put(6, "나지완");
+		map.put(7, "이범호");
+		map.put(8, "김민식");
+		map.put(9, "이명기");
+		return map;
+	}
+}

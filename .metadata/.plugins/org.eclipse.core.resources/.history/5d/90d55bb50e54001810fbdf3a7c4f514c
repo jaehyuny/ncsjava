@@ -1,0 +1,477 @@
+package project;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Random;
+
+public class HitPlay extends BaseballManagerPlay implements ActionListener{
+	
+	public void buttonEnable(boolean b) { 
+		run.setEnabled(b);
+		hitandrun.setEnabled(b);
+		runandhit.setEnabled(b);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(hit)) {
+			hitBall();
+		}
+		if(e.getSource().equals(wait)) {
+			waitBall();
+		}
+		if(e.getSource().equals(bunt)) {
+			bunt();
+		}
+		if(h!=0) {
+			tf=true;
+			buttonEnable(tf);
+		}else {
+			tf=false;
+			buttonEnable(tf);
+		}
+		HashMap<Integer, String> strike = new HashMap<Integer, String>();
+		strike.put(0, "0S");
+		strike.put(1, "1S");
+		strike.put(2, "2S");
+		HashMap<Integer, String> ball = new HashMap<Integer, String>();
+		ball.put(0, "0B");
+		ball.put(1, "1B ");
+		ball.put(2, "2B ");
+		ball.put(3, "3B ");
+		HashMap<Integer, String> base = new HashMap<Integer, String>();
+		base.put(0, "없음");
+		base.put(1, "1루");
+		base.put(2, "1,2루");
+		base.put(3, "만루");
+		base.put(4, "2루");
+		base.put(5, "3루");
+		base.put(6, "1,3루");
+		base.put(7, "2,3루");
+		if(num<=9) {
+			cast.setText(cast.getText()+"\n주자 "+base.get(h));
+			as.setText(ascore+"");
+			hs.setText(hscore+"");
+			inn.setText(num+inning);
+			if(o<3) {
+				cast.setText(cast.getText()+"\n\n"+ball.get(b)+strike.get(s)+" "+o+"OUT");
+			}
+			if(o>3) {
+				cast.setText(cast.getText()+"\n\n"+ball.get(b)+strike.get(s)+" "+(o-4)+"OUT");
+			}
+		}
+		if(num>9) {
+			boolean b = false;
+			cast.setText(cast.getText()+"\n\n경기 끝");
+			inn.setText("경기종료");
+			hit.setEnabled(b);
+			wait.setEnabled(b);
+			bunt.setEnabled(b);
+			run.setEnabled(b);
+			hitandrun.setEnabled(b);
+			runandhit.setEnabled(b);
+		}
+	}
+	private static String getRandArr(String[] arr) {
+        return arr[getRand(arr.length - 1)]; 
+    }
+ 
+	private static int getRand(int n) {
+		Random r = new Random();
+		int result = r.nextInt(n);
+        return result;
+    }
+	public void hitBall() {
+		if(o<3) {
+			hitBallMethod(hanhwa);
+		}
+		if(o>3) {
+			hitBallMethod(kia);
+		}
+	}
+	public void waitBall() {
+		if(o<3) {
+			waitBallMethod(hanhwa);
+		}
+		if(o>3) {
+			waitBallMethod(kia);
+		}
+	}
+	public void bunt() {
+		if(o<3) {
+			buntMethod(hanhwa);
+		}
+		if(o>3) {
+			buntMethod(kia);
+		}
+	}
+	public void hitBallMethod(HashMap<Integer,String> team) {
+		cast.setText(st+"번타자 "+team.get(st)+"\n"+ "타격\n");
+		if(cast.getText().contains(team.get(st))) {
+			if(random.nextInt(batting)<50) {
+				String temp = getRandArr(out);
+				cast.setText(cast.getText()+temp+" 아웃됩니다");
+				if(st<9) {
+					st++;
+				}else {
+					st=1;
+				}
+				s=0;
+				b=0;
+				o++;
+			}else if(random.nextInt(batting)<65) {
+				cast.setText(cast.getText()+"파울");
+				if(s==2) {
+					s=2;
+				}else {
+					s++;
+				}
+			}else if(random.nextInt(batting)<83) {
+				String temp = getRandArr(oneh);
+				cast.setText(cast.getText()+temp+" 안타");
+				if(st<9) {
+					st++;
+				}else {
+					st=1;
+				}
+				if(h==0) {
+					h=1;
+				}else if(h==1) {
+					h=2;
+				}else if(h==2) {
+					h=3;
+				}else if(h==3) {
+					h=3;
+					ascore++;
+				}else if(h==4) {
+					h=6;
+				}else if(h==5) {
+					h=1;
+					ascore++;
+				}else if(h==6) {
+					h=2;
+					ascore++;
+				}else if(h==7) {
+					h=6;
+					ascore++;
+				}
+				s=0;
+				b=0;
+			}else if(random.nextInt(batting)<93) {
+				String temp = getRandArr(twoh);
+				cast.setText(cast.getText()+temp+" 2루타");
+				if(st<9) {
+					st++;
+				}else {
+					st=1;
+				}
+				if(h==0) {
+					h=4;
+				}else if(h==1) {
+					h=7;
+				}else if(h==2) {
+					h=7;
+					ascore++;
+				}else if(h==3) {
+					h=7;
+					ascore++;
+					ascore++;
+				}else if(h==4) {
+					h=4;
+					ascore++;
+				}else if(h==5) {
+					h=4;
+					ascore++;
+				}else if(h==6) {
+					h=7;
+					ascore++;
+				}else if(h==7) {
+					h=4;
+					ascore++;
+					ascore++;
+				}
+				s=0;
+				b=0;
+			}else if(random.nextInt(batting)<98) {
+				String temp = getRandArr(hr);
+				cast.setText(cast.getText()+temp+" 홈런!!");
+				if(st<9) {
+					st++;
+				}else {
+					st=1;
+				}
+				if(h==0) {
+					h=0;
+					ascore++;
+				}else if(h==1) {
+					h=0;
+					ascore++;
+					ascore++;
+				}else if(h==2) {
+					h=0;
+					ascore++;
+					ascore++;
+					ascore++;
+				}else if(h==3) {
+					h=0;
+					ascore++;
+					ascore++;
+					ascore++;
+					ascore++;
+				}else if(h==4) {
+					h=0;
+					ascore++;
+					ascore++;
+				}else if(h==5) {
+					h=0;
+					ascore++;
+					ascore++;
+				}else if(h==6) {
+					h=0;
+					ascore++;
+					ascore++;
+					ascore++;
+				}else if(h==7) {
+					h=0;
+					ascore++;
+					ascore++;
+					ascore++;
+				}
+				s=0;
+				b=0;
+			}else if(random.nextInt(batting)<=100) {
+				String temp = getRandArr(twoh);
+				cast.setText(cast.getText()+temp+" 3루타");
+				if(st<9) {
+					st++;
+				}else {
+					st=1;
+				}
+				if(h==0) {
+					h=5;
+				}else if(h==1) {
+					h=5;
+					ascore++;
+				}else if(h==2) {
+					h=5;
+					ascore++;
+					ascore++;
+				}else if(h==3) {
+					h=5;
+					ascore++;
+					ascore++;
+					ascore++;
+				}else if(h==4) {
+					h=5;
+					ascore++;
+				}else if(h==5) {
+					h=5;
+					ascore++;
+				}else if(h==6) {
+					h=5;
+					ascore++;
+					ascore++;
+				}else if(h==7) {
+					h=5;
+					ascore++;
+					ascore++;
+				}
+				s=0;
+				b=0;
+			}
+		}
+		if(o==3) {
+			cast.setText(cast.getText()+"\n"+"공수교대!");
+			inning="회말";
+			h=0;
+			s=0;
+			b=0;
+			o++;
+		}
+		if(o==7) {
+			cast.setText(cast.getText()+"\n"+"공수교대!");
+			inning="회초";
+			h=0;
+			s=0;
+			b=0;
+			o=0;
+			num++;
+		}
+}
+public void waitBallMethod(HashMap<Integer,String> team) {
+	cast.setText(st+"번타자 "+team.get(st)+"\n"+ "지켜봅니다\n");
+	String temp = getRandArr(count);
+	if(cast.getText().contains(team.get(st))) {
+		if(random.nextInt(batting)<50) {
+			cast.setText(cast.getText()+temp+" 들어옵니다");
+			s++;
+		}else {
+			cast.setText(cast.getText()+temp+" 빠집니다");
+			b++;
+		}
+	}
+	if(s==3) {
+		cast.setText(cast.getText()+" 루킹 삼진아웃!");
+		s=0;
+		b=0;
+		o++;
+		if(st<9) {
+			st++;
+		}else {
+			st=1;
+		}
+	}
+	if(b==4) {
+		cast.setText(cast.getText()+" 볼넷!");
+		s=0;
+		b=0;
+		h++;
+		if(st<9) {
+			st++;
+		}else {
+			st=1;
+		}
+	}
+	if(o==3) {
+		cast.setText(cast.getText()+"\n"+"공수교대!");
+		inning="회말";
+		h=0;
+		s=0;
+		b=0;
+		o++;
+	}
+	if(o==7) {
+		cast.setText(cast.getText()+"\n"+"공수교대!");
+		inning="회초";
+		h=0;
+		s=0;
+		b=0;
+		o=0;
+		num++;
+	}
+}
+public void buntMethod(HashMap<Integer, String> team) {
+	cast.setText(st+"번타자 "+team.get(st)+"\n"+ "번트댑니다\n");
+	String temp = getRandArr(count);
+	if(cast.getText().contains(team.get(st))) {
+		if(random.nextInt(batting)<30) {
+			cast.setText(cast.getText()+temp+" 파울이네요");
+			s++;
+		}else if(random.nextInt(batting)<40){
+			cast.setText(cast.getText()+temp+" 번트 플라이 아웃됩니다");
+			s=0;
+			b=0;
+			o++;
+			if(st<9) {
+				st++;
+			}else {
+				st=1;
+			}
+		}else {
+			if(h==0) {
+				if(random.nextInt(batting)<50) {
+					cast.setText(cast.getText()+temp+" 기습번트 성공");
+					h=1;
+				}else {
+					cast.setText(cast.getText()+temp+" 기습번트 실패");
+					h=0;
+					o++;
+				}
+			}else if(h==1) {
+				if(random.nextInt(batting)<80) {
+					cast.setText(cast.getText()+temp+" 희생번트 성공");
+					h=4;
+					o++;
+				}else {
+					cast.setText(cast.getText()+temp+" 수비 실책으로 주자 올 세이프!!");
+					h=2;
+				}
+			}else if(h==2) {
+				if(random.nextInt(batting)<80) {
+					cast.setText(cast.getText()+temp+" 희생번트 성공");
+					h=7;
+					o++;
+				}else {
+					cast.setText(cast.getText()+temp+" 수비 실책으로 주자 올 세이프!!");
+					h=3;
+				}
+			}else if(h==3) {
+				if(random.nextInt(batting)<50) {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 성공!!");
+					h=3;
+					ascore++;
+				}else {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 실패!!");
+					h=3;
+					o++;
+				}
+			}else if(h==4) {
+				if(random.nextInt(batting)<80) {
+					cast.setText(cast.getText()+temp+" 희생번트 성공");
+					h=5;
+					o++;
+				}else {
+					cast.setText(cast.getText()+temp+" 수비 실책으로 주자 올 세이프!!");
+					h=7;
+				}
+			}else if(h==5) {
+				if(random.nextInt(batting)<50) {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 성공!!");
+					h=1;
+					ascore++;
+				}else {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 실패!!");
+					h=1;
+					o++;
+				}
+			}else if(h==6) {
+				if(random.nextInt(batting)<50) {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 성공!!");
+					h=2;
+					ascore++;
+				}else {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 실패!!");
+					h=2;
+					o++;
+				}
+				ascore++;
+			}else if(h==7) {
+				if(random.nextInt(batting)<50) {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 성공!!");
+					h=6;
+					ascore++;
+				}else {
+					cast.setText(cast.getText()+temp+" 스퀴즈번트 실패!!");
+					h=6;
+					o++;
+				}
+			}
+			if(st<9) {
+				st++;
+			}else {
+				st=1;
+			}
+			s=0;
+			b=0;
+		}
+	}
+	if(o==3) {
+		cast.setText(cast.getText()+"\n"+"공수교대!");
+		inning="회말";
+		h=0;
+		s=0;
+		b=0;
+		o++;
+	}
+	if(o==7) {
+		cast.setText(cast.getText()+"\n"+"공수교대!");
+		inning="회초";
+		h=0;
+		s=0;
+		b=0;
+		o=0;
+		num++;
+	}
+}
+}

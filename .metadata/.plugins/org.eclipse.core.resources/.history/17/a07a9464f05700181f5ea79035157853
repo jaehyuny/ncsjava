@@ -1,0 +1,47 @@
+package entities;
+
+public class PlayerAVG {
+	private String team;
+	private String name;
+	private int batting;
+	private int hit;
+	private int hr;
+	private int walk;
+	
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getBatting() {
+		return batting;
+	}
+	public void setBatting(int batting) {
+		this.batting = batting;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public int getHr() {
+		return hr;
+	}
+	public void setHr(int hr) {
+		this.hr = hr;
+	}
+	public int getWalk() {
+		return walk;
+	}
+	public void setWalk(int walk) {
+		this.walk = walk;
+	}
+}

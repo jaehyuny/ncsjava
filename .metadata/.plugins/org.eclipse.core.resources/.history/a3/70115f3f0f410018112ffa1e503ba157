@@ -1,0 +1,74 @@
+package mypackage;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class StackPractice {
+	public static void main(String[] args) {
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(10);
+		stack.push(20);
+		stack.push(30);
+		System.out.print(stack.pop());
+		stack.push(40);
+		stack.push(50);
+		while(!stack.isEmpty()) {
+			System.out.print(stack.pop());
+		}
+		System.out.println();
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		System.out.print(list.iterator());
+		list.add(40);
+		list.add(50);
+		for(Integer list1:list) {
+			System.out.print(list1);
+		}
+		System.out.println();
+		for(int i=0; i<list.size(); i++) {
+			System.out.print(list.get(i));
+		}
+		System.out.println();
+		Queue<String> queue = new LinkedList<String>();
+		queue.add("10");
+		queue.add("20");
+		queue.add("30");
+		queue.add("40");
+		while(!queue.isEmpty()) {
+			System.out.print(queue.poll()+"\t");
+		}
+		System.out.println();
+		HashMap<String,Integer> hash = new HashMap<String,Integer>();
+		hash.put("a", 1);
+		System.out.println(hash);
+		hashMove(hash);
+		System.out.println("ÇÕ°è:"+hash.get("ÇÕ°è"));
+		Iterator<String> it = hash.keySet().iterator();
+		while(it.hasNext()) {
+			String key = it.next();
+			System.out.println(key + ":"+hash.get(key));
+		}
+	}
+	static void hashMove(HashMap<String, Integer> hash) {
+		int even = 0;
+		int odd = 0;
+		int sum = 0;
+		for(int i=0; i<=100; i++) {
+			if(i%2==0) {
+				even += i;
+			}else {
+				odd += i;
+			}
+			sum += i;
+		}
+		hash.put("Â¦¼ö", even);
+		hash.put("È¦¼ö", odd);
+		hash.put("ÇÕ°è", sum);
+		
+	}
+}
